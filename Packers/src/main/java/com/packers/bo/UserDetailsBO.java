@@ -14,8 +14,9 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "USER_DETAILS")
 public class UserDetailsBO {
-	@Id @GeneratedValue(generator="system-uuid")
-	@GenericGenerator(name="system-uuid", strategy = "uuid")
+	@Id
+	@GeneratedValue(generator = "system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	private String id;
 	@Column
 	private String name;
@@ -35,7 +36,7 @@ public class UserDetailsBO {
 
 	public void setId(String id) {
 		this.id = id;
-		
+
 	}
 
 	public String getName() {
@@ -68,6 +69,14 @@ public class UserDetailsBO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Set<RolesBO> getRole() {
+		return role;
+	}
+
+	public void setRole(Set<RolesBO> role) {
+		this.role = role;
 	}
 
 	@Override
