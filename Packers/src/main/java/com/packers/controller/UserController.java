@@ -20,13 +20,13 @@ public class UserController {
 
 	private final String merchantKey = "gKpu7IKaLSbkchFS";
 	private String paytmChecksum = null;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 
 	@Autowired
 	private SecurityService securityService;
-	
+
 	@Autowired
 	private UserDetailsRepository userRepository;
 
@@ -36,9 +36,9 @@ public class UserController {
 		return "registration1";
 	}
 
-	@RequestMapping(value = "registerUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
 	public String registerUser(@ModelAttribute UserDetailsBO userDetails) {
-        userDetails.setPassword(encoder.encode(userDetails.getPassword()));
+		userDetails.setPassword(encoder.encode(userDetails.getPassword()));
 		userRepository.save(userDetails);
 		System.out.println(userDetails);
 		return "login1";
@@ -63,13 +63,14 @@ public class UserController {
 
 	@GetMapping("/login")
 	public String showLoginPage() {
+		System.out.println("UserController.showLoginPage()");
 		return "login1";
 	}
 
 	@PostMapping("/login")
 	public String validateLogin(@RequestParam("email") String email, @RequestParam("password") String password,
 			Model model) {
-
+		System.out.println("UserController.validateLogin()");
 		UserDetailsBO userDetails = userRepository.findByEmail(email);
 		/*
 		 * if (userDetails != null && userDetails.getPassword().equals(password)) {
@@ -79,15 +80,16 @@ public class UserController {
 		 * "userDashBoard"; } else { model.addAttribute("msg",
 		 * "Incorrect email or password"); return "login1"; }
 		 */
+		System.out.println(email+""+password);
 		boolean loginResponse = securityService.login(email, password);
+		System.out.println(loginResponse);
 		if (loginResponse) {
-              return "userDashBoard";
+			model.addAttribute("id",userDetails.getId());
+			return "userDashBoard";
 		} else {
 			model.addAttribute("msg", "User Name or Password is invalid.Try again..");
 		}
 		return "login1";
 	}
 
-	}
-
-
+}

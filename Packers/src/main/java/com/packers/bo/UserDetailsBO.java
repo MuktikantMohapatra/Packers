@@ -27,8 +27,9 @@ public class UserDetailsBO {
 	@Column
 	private String password;
 	@ManyToMany
-	@JoinTable(name = "USER_ROLE", joinColumns = @JoinColumn(name = "USER_ID"), inverseJoinColumns = @JoinColumn(name = "ROLE_ID"))
-	private Set<RolesBO> role;
+	@JoinTable(name = "USER_ROLE", joinColumns = {@JoinColumn(name = "ROLE_ID")}, inverseJoinColumns = {@JoinColumn(name= "USER_ID")})
+	private Set<RolesBO> user_role;
+	
 
 	public String getId() {
 		return id;
@@ -72,11 +73,11 @@ public class UserDetailsBO {
 	}
 
 	public Set<RolesBO> getRole() {
-		return role;
+		return user_role;
 	}
 
 	public void setRole(Set<RolesBO> role) {
-		this.role = role;
+		this.user_role = role;
 	}
 
 	@Override

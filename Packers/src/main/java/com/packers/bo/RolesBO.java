@@ -7,18 +7,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 
 @Entity
+@Table(name="ROLE")
 public class RolesBO implements GrantedAuthority {
 	@Id @GeneratedValue(generator="system-uuid")
 	@GenericGenerator(name="system-uuid", strategy = "uuid")
 	private String id;
 	@Column
 	private String name;
-	@ManyToMany(mappedBy = "role")
+	@ManyToMany(mappedBy = "user_role")
 	private Set<UserDetailsBO> user;
 
 	public String getId() {

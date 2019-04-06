@@ -10,7 +10,7 @@
 
 <form method = "post" action="booking">
 <pre>
-<input type="hidden" value = "${id}"name= "custId">
+<input type="text" value = "${id}"name= "custId">
 Welcome ${name}
 Shifting From: <input type="text" name="shiftingFrom">
 Shifting To: <input type="text" name="shiftingTo">

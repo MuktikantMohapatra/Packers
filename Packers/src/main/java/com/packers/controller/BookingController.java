@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.packers.bo.BookingBO;
@@ -41,6 +40,7 @@ public class BookingController {
 	public String showBookingPage(@RequestParam("id") String id ,Model model) {
 		
 		model.addAttribute("name", id);
+		model.addAttribute("id", id);
 		
 		return "booking";
 	}
@@ -48,6 +48,7 @@ public class BookingController {
 	@PostMapping
 	public String confirmBooking(@ModelAttribute BookingBO bo) {
 		Optional<UserDetailsBO> optBO = userRepository.findById(bo.getCustId());
+		System.out.println(optBO);
 		UserDetailsBO bo1 = optBO.get();
 		System.out.println(bo);
 		bookingRepository.save(bo);

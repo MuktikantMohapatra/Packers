@@ -22,7 +22,7 @@ public class OnlinePayment {
 	// This is the staging value. Production value is available in your dashboard
 	String industryTypeId = "Retail";
 	// This is the staging value. Production value is available in your dashboard
-	String callbackUrl = "https://<Merchant_Response_URL>";
+	String callbackUrl = "http://localhost:8090/packers/page>";
 	TreeMap<String, String> paytmParams = new TreeMap<String, String>();
 	
 	public String handler(Model model) throws Exception {
